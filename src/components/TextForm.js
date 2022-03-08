@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 const TextForm = (props) => {
+
     const handleUPClick = () => {
         let newText = text.toUpperCase();
         setText(newText);
@@ -20,6 +21,7 @@ const TextForm = (props) => {
         var text = document.getElementById("myBox");
         text.select();
         navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRanges();
         props.showAlert("Copied to Clipboard!", "success");
     }
 
@@ -38,22 +40,22 @@ const TextForm = (props) => {
     return (
         <>
             <div className="container" style={{ color: props.mode === 'light' ? '#122e4b' : 'white' }}>
-                <h1>{props.heading}</h1>
+                <h1 className="mb-4">{props.heading}</h1>
                 <div className="mb-3">
-                    <textarea className="form-control" placeholder="Enter text here" value={text} onChange={handleOnChange} id="myBox" rows="8" style={{ backgroundColor: props.mode === 'light' ? 'white' : 'grey', color: props.mode === 'light' ? '#122e4b' : 'white' }}></textarea>
+                    <textarea className="form-control" placeholder="Enter text here" value={text} onChange={handleOnChange} id="myBox" rows="8" style={{ backgroundColor: props.mode === 'light' ? 'white' : '#13466e', color: props.mode === 'light' ? '#122e4b' : 'white' }}></textarea>
                 </div>
-                <button className="btn btn-primary mx-1" style={{ backgroundColor: props.theme }} onClick={handleUPClick}>Convert to Uppercase</button>
-                <button className="btn btn-primary mx-1" style={{ backgroundColor: props.theme }} onClick={handleLWClick}>Convert to Lowercase</button>
-                <button className="btn btn-primary mx-1" style={{ backgroundColor: props.theme }} onClick={handleClear}>Clear Text</button>
-                <button className="btn btn-primary mx-1" style={{ backgroundColor: props.theme }} onClick={handleCopy}>Copy Text</button>
-                <button className="btn btn-primary mx-1" style={{ backgroundColor: props.theme }} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleUPClick}>Convert to Uppercase</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleLWClick}>Convert to Lowercase</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleClear}>Clear Text</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleCopy}>Copy Text</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
             </div>
             <div className="container my-3" style={{ color: props.mode === 'light' ? '#122e4b' : 'white' }}>
                 <h1>Your text summary</h1>
-                <p>{text.split(/[ ]+/).join(" ").trim().split(" ").length} words {text.length} characters</p>
-                <p>{0.08 * text.split(" ").length} Minutes read</p>
+                <p>{text.split(/\s+/).filter((element) => { return element.length !== 0 }).length} words {text.length} characters</p>
+                <p>{0.08 * text.split(" ").filter((element) => { return element.length !== 0 }).length} Minutes read</p>
                 <h2>Preview</h2>
-                <p>{text.length > 0 ? text : "Enter something in the text area to Preview here."}</p>
+                <p>{text.length > 0 ? text : "Nothing to Preview"}</p>
             </div>
         </>
     )
