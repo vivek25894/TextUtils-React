@@ -41,11 +41,11 @@ const TextForm = (props) => {
                 <div className="mb-3">
                     <textarea className="form-control" placeholder="Enter text here" value={text} onChange={handleOnChange} id="myBox" rows="8" style={{ backgroundColor: props.mode === 'light' ? 'white' : '#13466e', color: props.mode === 'light' ? '#122e4b' : 'white' }}></textarea>
                 </div>
-                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleUPClick}>Convert to Uppercase</button>
-                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleLWClick}>Convert to Lowercase</button>
-                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleClear}>Clear Text</button>
-                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleCopy}>Copy Text</button>
-                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${props.theme} mx-1 my-1`} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${(props.theme==='')?`primary`:props.theme} mx-1 my-1`} onClick={handleUPClick}>Convert to Uppercase</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${(props.theme==='')?`primary`:props.theme} mx-1 my-1`} onClick={handleLWClick}>Convert to Lowercase</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${(props.theme==='')?`primary`:props.theme} mx-1 my-1`} onClick={handleClear}>Clear Text</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${(props.theme==='')?`primary`:props.theme} mx-1 my-1`} onClick={handleCopy}>Copy Text</button>
+                <button disabled={text.length === 0} style={{border:'1px solid black'}} className={`btn btn-${(props.theme==='')?`primary`:props.theme} mx-1 my-1`} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
             </div>
             <div className="container my-3" style={{ color: props.mode === 'light' ? '#122e4b' : 'white' }}>
                 <h1>Your text summary</h1>
